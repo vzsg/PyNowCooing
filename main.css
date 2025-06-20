@@ -1,0 +1,99 @@
+:root {
+    --track-color: #ffffff;
+    --artist-color: #d1d1d1;
+}
+
+body {
+    background-color: rgba(0, 0, 0, 0);
+    margin: 0px auto;
+    overflow: hidden;
+    font-family: 'Pangolin', cursive;
+}
+
+#root {
+    width: 540px;
+    height: 70px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.background-blur {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: blur(15px) brightness(0.7);
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+.content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.album-container {
+    height: 60px;
+    width: 60px;
+    flex-shrink: 0;
+    margin-right: 15px;
+}
+
+#albumart {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+#trackInfo {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#trackTitle, #artistName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#trackTitle {
+    color: var(--track-color);
+    font-size: 1.2em;
+    margin-bottom: 4px;
+}
+
+#artistName {
+    color: var(--artist-color);
+    font-size: 1em;
+}
+
+.scrollable {
+    animation: none;
+}
+
+@keyframes scrollText {
+    0%, 10% {
+        transform: translateX(0);
+    }
+    90%, 100% {
+        transform: translateX(calc(-100% + 440px)); /* 540px - 60px - 15px - 25px padding */
+    }
+}
+
+.scroll-active {
+    animation: scrollText 15s infinite alternate ease-in-out;
+}

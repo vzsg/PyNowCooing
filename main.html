@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Now Playing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div id="root">
+        <div class="background-blur"></div>
+        <div class="content">
+            <div class="album-container">
+                <img id="albumart" src="" alt="Album Art">
+            </div>
+            <div id="trackInfo">
+                <div id="trackTitle" class="scrollable"></div>
+                <div id="artistName" class="scrollable"></div>
+            </div>
+        </div>
+    </div>
+    <!-- Hidden measurement div for width calculation -->
+    <div id="measure" style="position:absolute;visibility:hidden;height:auto;width:auto;white-space:nowrap;font-family:'Pangolin',cursive;font-size:1.2em;"></div>
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
