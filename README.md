@@ -12,21 +12,21 @@ This is very much a work in progress and I would like to make it more user-frien
 
 With a medium title:
 
-![Screenshot of the overlay with a medium title](/src/medium-title.png?raw=true "Screenshot of the overlay with a medium title")
+![Screenshot of the overlay with a medium title](/src/screenshots/medium-title.png?raw=true "Screenshot of the overlay with a medium title")
 
 Long title:
 
-![Screenshot of the overlay with a long title](/src/long-title.png?raw=true "Screenshot of the overlay with a long title")
+![Screenshot of the overlay with a long title](/src/screenshots/long-title.png?raw=true "Screenshot of the overlay with a long title")
 
-![Screenshot of the overlay with a long title in OBS](/src/long-title-obs.png?raw=true "Screenshot of the overlay with a long title in OBS")
+![Screenshot of the overlay with a long title in OBS](/src/screenshots/long-title-obs.png?raw=true "Screenshot of the overlay with a long title in OBS")
 
 - When the album cover is unavailable, it is hidden entirely.
 - You can define a set of 4 colors which will be used to generate random backgrounds.
   These backgrounds will change on every song!
 
-  ![First screenshot of the overlay with no cover](/src/no-cover-1.png?raw=true "First screenshot of the overlay with no cover")
+  ![First screenshot of the overlay with no cover](/src/screenshots/no-cover-1.png?raw=true "First screenshot of the overlay with no cover")
   
-  ![Second screenshot of the overlay with no cover](/src/no-cover-2.png?raw=true "Second screenshot of the overlay with no cover")
+  ![Second screenshot of the overlay with no cover](/src/screenshots/no-cover-2.png?raw=true "Second screenshot of the overlay with no cover")
 
 ## Setup
 The instructions below are only there if you already know what you're doing, otherwise I would advise waiting for the next update!
