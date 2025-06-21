@@ -34,7 +34,41 @@ When the album cover is unavailable, it is hidden entirely.
 
   ![Second screenshot of the overlay with no cover](https://github.com/user-attachments/assets/4eea565a-888f-423e-a8c0-0a95fb80ecb2)
 
-## Releases
+## Development
 
-### v0.0.1 (2025-06-21)
-- Initial release
+To run the app from source locally:
+
+1. Have Python installed.  
+   Python 3.13.5 is known to work, older versions might work too.
+2. Clone the git repository.
+3. Create and activate a virtual environment per your preference.
+
+   ```sh
+   python -m venv venv
+   venv\Scripts\activate
+   ```
+
+4. Install dependencies:
+
+   ```sh
+   pip install -r requirements.txt
+   ```
+
+5. Run the app:
+
+    ```sh
+    python PyNowCooing.py
+    ```
+
+6. Package the app with pyinstaller (optional):
+
+    ```sh
+    pip install pyinstaller
+    pyinstaller --add-data "static:static" --onefile PyNowCooing.py
+    ```
+
+## Ideas for the future
+
+- Allow theme customizations (sizing limits, marquee effect for small width, font and color changes, etc)
+- Build a GUI to replace the console window and allow basic configuration (listen port, start/stop, preferred media app, etc)
+- Combine the two together for a full experience.
