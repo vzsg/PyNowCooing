@@ -1,4 +1,6 @@
 .vs/
 venv/
+.venv/
+.idea/
 build/
 dist/
