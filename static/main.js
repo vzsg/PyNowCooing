@@ -1,28 +1,5 @@
 // ========== CONFIG ==========
-var interval = 1; // query interval in seconds
-var musicSource = "lastfm"; // "lastfm" or "spotify"
-
-// ========== LAST.FM SETTINGS ==========
-var username = 'kloporte1'; // your Last.FM username
-var apiKey = ""; // your Last.FM api key
-
-// ========== SPOTIFY SETTINGS ==========
-/*
-  --- SPOTIFY LOGIN FLOW ---
-  1. Open:
-     https://accounts.spotify.com/authorize?response_type=code&client_id=YOUR_CLIENT_ID&scope=user-read-currently-playing%20user-read-playback-position&redirect_uri=YOUR_REDIRECT_URI
-  2. Login, allow access, copy the "code" from the redirected URL.
-  3. Paste the code in 'spotifyCode' below.
-  4. Open main.html and check browser console after login. The refresh token will be printed there. Paste it in 'spotifyRefreshToken'.
-  5. Fill in your clientId, clientSecret, and redirectUri below.
-*/
-var spotifyCode = ""; // Step 3: Paste code here
-var spotifyRefreshToken = ""; // Step 4: Paste refresh token here
-var spotifyClientId = "";
-var spotifyClientSecret = "";
-var spotifyRedirectUri = "https://google.com"; // Must match your Spotify app settings
-
-const SPOTIFY_TOKEN_URL = 'https://accounts.spotify.com/api/token';
+var interval = 5; // query interval in seconds
 
 const MIN_WIDTH = 350;
 const MAX_WIDTH = 540;
@@ -139,96 +116,17 @@ function setUserColorSet(newColors) {
     }
 }
 
-// ========== LAST.FM FETCH ==========
-function getRecentTracksLastFM(callback) {
+// ========== DATA FETCHING ==========
+function getCurrentMedia(callback) {
     var request = new XMLHttpRequest();
-    request.open(
-        'GET',
-        'https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&nowplaying="true"&user='
-        + username + '&api_key=' + apiKey + '&format=json',
-        true
-    );
+    request.open('GET', '/api', true);
     request.onload = function () {
         var data = JSON.parse(this.response);
-        if (!data.recenttracks || !data.recenttracks.track || !data.recenttracks.track[0]) return;
-        var track = data.recenttracks.track[0];
-        var albumArtUrl = track.image && track.image.length ? track.image.slice(-1)[0]['#text'] : "";
-        var trackId = (track.name || "") + "|" + (track.artist && track.artist["#text"] ? track.artist["#text"] : "") + "|" + (track.album && track.album["#text"] ? track.album["#text"] : "");
-        displayTrack(track.name || "", track.artist['#text'] || "", albumArtUrl, trackId);
+        var trackId = `${data.title || ''}|${data.artist || ''}|${data.album || ''}`
+        displayTrack(data.title || '', data.artist || '', data.thumbnail || '', trackId);
         if (callback) callback();
-    };
+    }
     request.send();
-}
-
-// ========== SPOTIFY SUPPORT ==========
-var spotifyTokenInfo = { access_token: null, expires_at: 0, refresh_token: spotifyRefreshToken };
-
-function refreshSpotifyAccessToken(callback) {
-    if (!spotifyRefreshToken && !spotifyTokenInfo.refresh_token) {
-        if (!spotifyCode) return;
-        // Exchange code for token
-        var params = new URLSearchParams({
-            grant_type: 'authorization_code',
-            code: spotifyCode,
-            redirect_uri: spotifyRedirectUri
-        });
-    } else {
-        // Refresh with refresh_token
-        var params = new URLSearchParams({
-            grant_type: 'refresh_token',
-            refresh_token: spotifyRefreshToken || spotifyTokenInfo.refresh_token,
-            redirect_uri: spotifyRedirectUri
-        });
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', SPOTIFY_TOKEN_URL, true);
-    xhr.setRequestHeader('Authorization', 'Basic ' + btoa(spotifyClientId + ':' + spotifyClientSecret));
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onload = function () {
-        if (this.status >= 400) {
-            console.error("Spotify token error");
-            return;
-        }
-        var token = JSON.parse(this.response);
-        spotifyTokenInfo.access_token = token.access_token;
-        spotifyTokenInfo.expires_at = Date.now() + (token.expires_in * 1000);
-        if (token.refresh_token) {
-            spotifyTokenInfo.refresh_token = token.refresh_token;
-        }
-        if (!spotifyRefreshToken && token.refresh_token) {
-            // Print refresh token for user setup
-            console.log(
-                'Your Spotify refresh token is: ' + token.refresh_token +
-                '.\nPlease copy it into the \'spotifyRefreshToken\' variable in main.js.'
-            );
-        }
-        if (callback) callback();
-    };
-    xhr.send(params.toString());
-}
-
-function getRecentTracksSpotify(callback) {
-    // If token expired or missing, refresh
-    if (!spotifyTokenInfo.access_token || Date.now() > spotifyTokenInfo.expires_at - 60000) {
-        refreshSpotifyAccessToken(function () { getRecentTracksSpotify(callback); });
-        return;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'https://api.spotify.com/v1/me/player/currently-playing', true);
-    xhr.setRequestHeader('Authorization', 'Bearer ' + spotifyTokenInfo.access_token);
-    xhr.onload = function () {
-        try {
-            var data = JSON.parse(this.response);
-            if (!data || !data.item) return;
-            var item = data.item;
-            var albumArtUrl = item.album && item.album.images && item.album.images.length ? item.album.images[0].url : "";
-            var artistNames = item.artists.map(a => a.name).join(", ");
-            var trackId = (item.name || "") + "|" + artistNames + "|" + (item.album && item.album.name ? item.album.name : "");
-            displayTrack(item.name || "", artistNames, albumArtUrl, trackId);
-            if (callback) callback();
-        } catch (err) { /* ignore */ }
-    };
-    xhr.send();
 }
 
 // ========== DISPLAY LOGIC ==========
@@ -258,13 +156,6 @@ function displayTrack(title, artist, albumArtUrl, trackId) {
 }
 
 // ========== POLLING & INIT ==========
-function pollNowPlaying() {
-    if (musicSource === "spotify") {
-        getRecentTracksSpotify();
-    } else {
-        getRecentTracksLastFM();
-    }
-}
 
-pollNowPlaying();
-setInterval(pollNowPlaying, interval * 1000);
+getCurrentMedia();
+setInterval(getCurrentMedia, interval * 1000);
