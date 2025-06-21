@@ -5,7 +5,8 @@ This project is based on [NowCooing](https://github.com/victorlxyz/NowCooing), w
 
 ## Functionalities
 
-- Shows the current song title, artist name, and album cover from any modern media player - tested with Spotify, Foobar2000, Apple Music and YouTube in Chrome.
+- Shows the current song title, artist name, and album cover from any modern media player.  
+  Tested with Spotify, Foobar2000, Apple Music and YouTube in Chrome.
 - Overlay automatically resizes based on title name/artist name length.
 - Single executable for Windows, no installation required.
 
@@ -56,16 +57,16 @@ To run the app from source locally:
 
 5. Run the app:
 
-    ```sh
-    python PyNowCooing.py
-    ```
+   ```sh
+   python PyNowCooing.py
+   ```
 
 6. Package the app with pyinstaller (optional):
 
-    ```sh
-    pip install pyinstaller
-    pyinstaller --add-data "static:static" --onefile PyNowCooing.py
-    ```
+   ```sh
+   pip install pyinstaller
+   pyinstaller --add-data "static:static" --onefile PyNowCooing.py
+   ```
 
 ## Ideas for the future
 
