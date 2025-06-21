@@ -9,26 +9,6 @@ This project is based on [NowCooing](https://github.com/victorlxyz/NowCooing), w
 - Overlay automatically resizes based on title name/artist name length.
 - Single executable for Windows, no installation required.
 
-## Examples
-
-### Short title
-
-![Screenshot of the overlay with a short title](/src/screenshots/NowCooing_screenshot_short-title.png?raw=true "Screenshot of the overlay with a short title")
-
-### Long title
-
-![Screenshot of the overlay with a long title](/src/screenshots/NowCooing_screenshot_long-title.png?raw=true "Screenshot of the overlay with a long title")
-
-![Second screenshot of the overlay with a long title](/src/screenshots/NowCooing_screenshot_long-title-2.png?raw=true "Second screenshot of the overlay with a long title")
-
-### No album cover
-
-When the album cover is unavailable, it is hidden entirely.
-
-  ![First screenshot of the overlay with no cover](/src/screenshots/NowCooing_screenshot_no-cover-1.png?raw=true "First screenshot of the overlay with no cover")
-  
-  ![Second screenshot of the overlay with no cover](/src/screenshots/NowCooing_screenshot_no-cover-2.png?raw=true "Second screenshot of the overlay with no cover")
-
 ## Usage
 
 - Download the latest release from [Releases](github.com/vzsg/PyNowCooing/releases).
@@ -36,8 +16,25 @@ When the album cover is unavailable, it is hidden entirely.
 - Set up as a browser source in OBS (change the URL to what the window shows, other default settings will do).
 - If you have multiple media players open, use the media controls of the Windows taskbar (click the volume icon) to select the one you want to show in the overlay.
 
+## Examples
+
+### Album cover
+
+  ![Screenshot of the overlay with a short title](https://github.com/user-attachments/assets/ceb43e1d-442f-43c9-b3cf-4eb1a5aef0f5)
+
+  ![Screenshot of the overlay with a long title](https://github.com/user-attachments/assets/b0525864-21f7-43fb-985c-a1fd07e95fd8)
+
+  ![Second screenshot of the overlay with a long title](https://github.com/user-attachments/assets/dce9c18c-2fb1-442c-affd-2f83a7ce8e74)
+
+### No album cover
+
+When the album cover is unavailable, it is hidden entirely.
+
+  ![First screenshot of the overlay with no cover](https://github.com/user-attachments/assets/d2aea701-7fa2-4043-b8a3-164009e36924)
+
+  ![Second screenshot of the overlay with no cover](https://github.com/user-attachments/assets/4eea565a-888f-423e-a8c0-0a95fb80ecb2)
+
 ## Releases
 
 ### v0.0.1 (2025-06-21)
 - Initial release
-
