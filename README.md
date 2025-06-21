@@ -12,7 +12,7 @@ This project is based on [NowCooing](https://github.com/victorlxyz/NowCooing), w
 
 ## Usage
 
-- Download the latest release from [Releases](github.com/vzsg/PyNowCooing/releases).
+- Download the latest release from [Releases](https://github.com/vzsg/PyNowCooing/releases).
 - Launch the executable `PyNowCooing.exe`, a console window will appear after a few seconds.
 - Set up as a browser source in OBS (change the URL to what the window shows, other default settings will do).
 - If you have multiple media players open, use the media controls of the Windows taskbar.  
